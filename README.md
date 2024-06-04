@@ -24,6 +24,7 @@
 
 ### <a name="ansible"></a>[🤖 Ansible](Ansible/README.md)
 ### <a name="aws"></a>[🤖 AWS](AWS/README.md)
+### <a name="jenkins"></a>[🤖 Jenkins](Jenkins/README.md)
 ### <a name="kubernetes"></a>[🤖 Kubernetes](Kubernetes/README.md)
 ### <a name="terraform"></a>[🤖 Terraform](Terraform/README.md)
 
