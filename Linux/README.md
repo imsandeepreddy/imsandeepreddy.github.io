@@ -1,11 +1,5 @@
 # My GitHub Pages Website
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Topic 1](#topic-1)
-- [Topic 2](#topic-2)
-- [Topic 3](#topic-3)
-
 <details>
 <summary>Introduction</summary>
 
@@ -17,8 +11,26 @@ This is the introduction section. Click to expand or collapse.
 <details>
 <summary>Topic 1</summary>
 
-## Topic 1
-This is Topic 1. Click to expand or collapse.
+### Mount and Unmount
+
+### Example Scenario
+
+Let's say you have another partition called `/dev/sdb1` that you want to mount to `/mnt` instead of `/dev/sda1`.
+
+1. **Check the Current Mounts**
+
+   ```bash
+   lsblk
+   ```
+
+   Output:
+   ```
+   NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+   sda      8:0    0  100G  0 disk 
+   └─sda1   8:1    0  100G  0 part /mnt
+   sdb      8:16   0  200G  0 disk 
+   └─sdb1   8:17   0  200G  0 part 
+   ```
 
 </details>
 
