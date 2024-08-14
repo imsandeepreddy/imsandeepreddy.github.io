@@ -1,0 +1,26 @@
+---
+- name: SDWAN Upgrade
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Include role
+      include_role:
+         name: MNS_SDWAN_SDWANUpgrade
+  #vars_files:
+  #  - "./vars/vars.yml"
+  #tasks:
+  #  - name: Pre checks
+  #    include_role:
+  #      name: pre_checks
+  #  - name: Upgrade software
+  #    include_role:
+  #      name: upgrade_software
+  #  - name: Post checks
+  #    include_role:
+  #      name: execute_commands
+  #    vars: 
+  #      log_file_name: "Postcheck-Commands.txt"
+  #  - name: Cleanup
+  #    include_role:
+  #      name: cleanup
