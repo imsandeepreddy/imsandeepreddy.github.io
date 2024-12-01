@@ -1,6 +1,7 @@
 <div style="display: flex;">
   <div style="flex: 1;">
     <img src="ProfilePic.jpg" alt="Picture" width="200" />
+    <img src="ProfilePic2.webp" alt="Picture" width="200" />
   </div>
   <div style="flex: 2;">
     <h2>Hello, this is Sandeep Reddy 👋</h2>
