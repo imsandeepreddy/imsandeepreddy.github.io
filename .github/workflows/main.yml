@@ -40,5 +40,5 @@ jobs:
         if: github.ref == 'refs/heads/updated'
         uses: actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.secret }}
           publish_dir: dist/public
