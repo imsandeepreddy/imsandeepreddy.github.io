@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: List dist directory contents
-        run: ls -R dist
+        run: ls -R dist/public
 
       #- name: Run tests
       #  run: npm test
