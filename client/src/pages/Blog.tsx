@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { useState } from "react";
 
 const sampleBlogs = [
@@ -51,6 +51,7 @@ const Blogs = () => {
             <DialogHeader>
               <DialogTitle>{selectedBlog.title}</DialogTitle>
               <DialogDescription>{selectedBlog.date}</DialogDescription>
+              <DialogClose onClick={closeDialog} className="absolute top-2 right-2 cursor-pointer">X</DialogClose>
             </DialogHeader>
             <p>{selectedBlog.content}</p>
             <button onClick={closeDialog} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Close</button>
