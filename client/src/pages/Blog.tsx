@@ -2,22 +2,23 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState } from "react";
+import BlogContent from "@/components/BlogContent";
 
 const sampleBlogs = [
   {
     title: "Understanding AWS",
     date: "October 10, 2023",
-    content: "AWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon. It offers a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings."
+    gistUrl: "https://raw.githubusercontent.com/imsandeepreddy/imsandeepreddy.github.io/refs/heads/main/Kubernetes/StatefulSets/README.md"
   },
   {
     title: "Getting Started with Kubernetes",
     date: "September 15, 2023",
-    content: "Kubernetes is an open-source container-orchestration system for automating computer application deployment, scaling, and management. It was originally designed by Google and is now maintained by the Cloud Native Computing Foundation."
+    gistUrl: "https://raw.githubusercontent.com/imsandeepreddy/imsandeepreddy.github.io/refs/heads/main/Kubernetes/StatefulSets/README.md"
   },
   {
     title: "CI/CD with GitHub Actions",
     date: "August 20, 2023",
-    content: "GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want."
+    gistUrl: "https://raw.githubusercontent.com/imsandeepreddy/imsandeepreddy.github.io/refs/heads/main/Kubernetes/StatefulSets/README.md"
   }
 ];
 
@@ -40,7 +41,7 @@ const Blogs = () => {
           <CardContent>
             <h2 className="text-2xl font-semibold">{blog.title}</h2>
             <p className="text-gray-500">{blog.date}</p>
-            <p className="mt-2">{blog.content.substring(0, 100)}...</p>
+            <p className="mt-2">Click to read more...</p>
           </CardContent>
         </Card>
       ))}
@@ -52,7 +53,7 @@ const Blogs = () => {
               <DialogTitle>{selectedBlog.title}</DialogTitle>
               <DialogDescription>{selectedBlog.date}</DialogDescription>
             </DialogHeader>
-            <p>{selectedBlog.content}</p>
+            <BlogContent gistUrl={selectedBlog.gistUrl} />
             <button onClick={closeDialog} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Close</button>
           </DialogContent>
         </Dialog>
