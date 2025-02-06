@@ -53,6 +53,7 @@ const Blogs = () => {
               <DialogDescription>{selectedBlog.date}</DialogDescription>
             </DialogHeader>
             <p>{selectedBlog.content}</p>
+            <button onClick={closeDialog} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Close</button>
           </DialogContent>
         </Dialog>
       )}
