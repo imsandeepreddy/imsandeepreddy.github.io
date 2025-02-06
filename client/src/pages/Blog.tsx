@@ -48,7 +48,7 @@ const Blogs = () => {
 
       {selectedBlog && (
         <Dialog open={true} onClose={closeDialog}>
-          <DialogContent className="max-h-screen overflow-y-auto p-4">
+          <DialogContent className="max-h-screen overflow-y-auto p-4 w-full max-w-4xl">
             <DialogHeader>
               <DialogTitle>{selectedBlog.title}</DialogTitle>
               <DialogDescription>{selectedBlog.date}</DialogDescription>
