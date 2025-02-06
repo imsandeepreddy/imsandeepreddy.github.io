@@ -48,12 +48,14 @@ const Blogs = () => {
 
       {selectedBlog && (
         <Dialog open={true} onClose={closeDialog}>
-          <DialogContent>
+          <DialogContent className="max-h-screen overflow-y-auto p-4">
             <DialogHeader>
               <DialogTitle>{selectedBlog.title}</DialogTitle>
               <DialogDescription>{selectedBlog.date}</DialogDescription>
             </DialogHeader>
-            <BlogContent gistUrl={selectedBlog.gistUrl} />
+            <div className="prose">
+              <BlogContent gistUrl={selectedBlog.gistUrl} />
+            </div>
             <button onClick={closeDialog} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Close</button>
           </DialogContent>
         </Dialog>
