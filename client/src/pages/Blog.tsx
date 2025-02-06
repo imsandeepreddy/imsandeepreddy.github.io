@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState } from "react";
-import BlogContent from "@/components/BlogContent";
+import BlogContent from "@/components/ui/BlogContent";
 
 const sampleBlogs = [
   {
