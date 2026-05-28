@@ -1,58 +1,441 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
-    <style data-vite-theme="" data-inject-first="">:root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 220 80% 50%;
---primary-foreground: 218 98% 99%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 60 4.8% 95.9%;
---accent-foreground: 24 9.8% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 20 14.3% 4.1%;
---radius: 0.5rem;
-  }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 220 80% 50%;
---primary-foreground: 218 98% 99%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 240 4.9% 83.9%;
---radius: 0.5rem;
-  }</style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandeep Reddy</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" crossorigin src="/assets/index-C3hp_Yah.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-MmY_fOri.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  :root {
+    --bg: #0a0c0f;
+    --bg2: #0f1217;
+    --bg3: #151a21;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(99,230,190,0.3);
+    --accent: #63e6be;
+    --accent2: #74c0fc;
+    --text: #e8edf3;
+    --muted: #5a6478;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .scanline {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 3.5rem;
+  }
+
+  .hero-prompt {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-prompt::before {
+    content: '> ';
+    color: var(--accent);
+  }
+
+  .hero-name {
+    font-family: var(--sans);
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 1.2rem 0 2rem;
+    line-height: 1.8;
+    max-width: 480px;
+  }
+
+  .hero-tagline .tag {
+    display: inline-block;
+    background: rgba(99,230,190,0.08);
+    border: 1px solid rgba(99,230,190,0.15);
+    color: var(--accent);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin: 2px 3px 2px 0;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* SECTION */
+  section { padding: 2.5rem 0; border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-label::before { content: '// '; opacity: 0.5; }
+
+  /* STACK */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .stack-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .stack-item:hover { border-color: var(--border-hover); color: var(--text); }
+
+  .stack-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .dot-green { background: var(--accent); }
+  .dot-blue { background: var(--accent2); }
+  .dot-amber { background: #ffd43b; }
+
+  /* PROJECTS */
+  .project-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .project-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .project-item:hover { border-color: var(--border-hover); background: var(--bg3); }
+
+  .project-name {
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .project-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .project-arrow {
+    font-size: 16px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .project-item:hover .project-arrow { color: var(--accent); transform: translateX(3px); }
+
+  /* WRITING */
+  .post-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .post-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .post-item:hover { border-color: var(--border-hover); }
+
+  .post-title { font-size: 12px; color: var(--text); }
+
+  .post-meta { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  /* CONNECT */
+  .connect-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .connect-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .connect-btn:hover { color: var(--accent); border-color: var(--border-hover); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-txt { font-size: 11px; color: var(--muted); }
+  .footer-txt span { color: var(--accent); }
+
+  /* CURSOR BLINK */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--accent);
+    margin-left: 3px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.12s; }
+  .fade-in:nth-child(3) { animation-delay: 0.19s; }
+  .fade-in:nth-child(4) { animation-delay: 0.26s; }
+  .fade-in:nth-child(5) { animation-delay: 0.33s; }
+</style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<div class="container">
+
+  <nav>
+    <div class="nav-logo">sandeep@cloud:~$<span class="cursor"></span></div>
+    <ul class="nav-links">
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#writing">writing</a></li>
+      <li><a href="#connect">connect</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero fade-in">
+    <div class="hero-prompt">whoami</div>
+    <h1 class="hero-name">Sandeep<br><span>Reddy</span></h1>
+    <p class="hero-tagline">
+      Engineering the bridge between infrastructure and intelligence.<br>
+      <span class="tag">DevOps</span>
+      <span class="tag">Cloud Native</span>
+      <span class="tag">AI / Claude</span>
+      <span class="tag">Kubernetes</span>
+      <span class="tag">IaC</span>
+    </p>
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      open to new opportunities &mdash; Hyderabad, IN
+    </div>
+  </div>
+
+  <section id="stack" class="fade-in">
+    <div class="section-label">stack</div>
+    <div class="stack-grid">
+      <div class="stack-item"><span class="stack-dot dot-green"></span>Docker</div>
+      <div class="stack-item"><span class="stack-dot dot-green"></span>Kubernetes</div>
+      <div class="stack-item"><span class="stack-dot dot-green"></span>Terraform</div>
+      <div class="stack-item"><span class="stack-dot dot-green"></span>GitHub Actions</div>
+      <div class="stack-item"><span class="stack-dot dot-blue"></span>Prometheus</div>
+      <div class="stack-item"><span class="stack-dot dot-blue"></span>Grafana</div>
+      <div class="stack-item"><span class="stack-dot dot-amber"></span>Claude API</div>
+      <div class="stack-item"><span class="stack-dot dot-amber"></span>MCP</div>
+      <div class="stack-item"><span class="stack-dot dot-blue"></span>Python</div>
+      <div class="stack-item"><span class="stack-dot dot-green"></span>Bash</div>
+    </div>
+  </section>
+
+  <section id="projects" class="fade-in">
+    <div class="section-label">projects</div>
+    <div class="project-list">
+
+      <!-- PROJECT 1 — replace href, name, and desc with your actual repo -->
+      <a class="project-item" href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">
+        <div>
+          <div class="project-name">k8s-observability-stack</div>
+          <div class="project-desc">Production-grade Prometheus + Grafana setup for Kubernetes clusters with pre-built dashboards.</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+      <!-- PROJECT 2 -->
+      <a class="project-item" href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">
+        <div>
+          <div class="project-name">claude-devops-agent</div>
+          <div class="project-desc">Agentic workflow using Claude API + tool use for infrastructure automation and incident triage.</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+      <!-- PROJECT 3 -->
+      <a class="project-item" href="https://github.com/imsandeepreddy/projects" target="_blank">
+        <div>
+          <div class="project-name">iac-terraform-modules</div>
+          <div class="project-desc">Reusable Terraform modules for cloud-native deployments on AWS with CI/CD integration.</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="writing" class="fade-in">
+    <div class="section-label">writing</div>
+    <div class="post-list">
+      <a class="post-item" href="https://backtothecloud.com" target="_blank">
+        <span class="post-title">backtothecloud.com &mdash; occasional dispatches on cloud &amp; AI</span>
+        <span class="post-meta">↗ newsletter</span>
+      </a>
+      <div class="post-item" style="cursor: default;">
+        <span class="post-title" style="color: var(--muted);">more posts coming soon...</span>
+        <span class="post-meta">&mdash;</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="connect" class="fade-in">
+    <div class="section-label">connect</div>
+    <div class="connect-row">
+      <a class="connect-btn" href="https://github.com/imsandeepreddy" target="_blank">⌥ github</a>
+      <a class="connect-btn" href="https://linkedin.com/in/sandeep-reddy-00a8b839" target="_blank">⌥ linkedin</a>
+      <a class="connect-btn" href="https://backtothecloud.com" target="_blank">⌥ newsletter</a>
+      <a class="connect-btn" href="mailto:sandeep.reddy1992@gmail.com">⌥ email</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-txt">built with <span>↑</span> minimal HTML &middot; hosted on GitHub Pages</span>
+    <span class="footer-txt">backtothecloud.com</span>
+  </footer>
+
+</div>
+
+</body>
 </html>
